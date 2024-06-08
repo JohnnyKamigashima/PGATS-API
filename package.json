@@ -1,0 +1,19 @@
+{
+  "name": "pgats_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch test/**/*.test.js",
+    "testUser": "jest --watch test/usuarios/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "dependencies": {
+    "faker-br": "^0.4.1"
+  }
+}
