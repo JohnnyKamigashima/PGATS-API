@@ -1,4 +1,4 @@
-const faker = require('faker-br')
+const faker = require('faker')
 
 class CadastroBody {
     nome = null
@@ -6,24 +6,12 @@ class CadastroBody {
     email = null
     senha = null
 
-    fakeEmail = () => {
-        return faker.internet.email()
+    constructor() {
+        this.nome = faker.name.firstName() + ' ' + faker.name.lastName();
+        this.email = faker.internet.email();
+        this.telefone = faker.phone.phoneNumber();
+        this.senha = faker.internet.password()
     }
-
-    fakeNome = () => {
-        const firstName = faker.name.firstName();
-        const lastName = faker.name.lastName();
-        return `${firstName} ${lastName}`
-    }
-
-    fakeTelefone = () => {
-        return faker.phone.phoneNumber()
-    }
-
-    fakeSenha = () => {
-        return faker.internet.password()
-    }
-
 }
 
 module.exports = CadastroBody
