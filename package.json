@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch test/**/*.test.js",
-    "testUser": "jest --watch test/usuarios/*.test.js"
+    "testUser": "jest --inspect-brk --watch test/usuarios/users.test.js"
   },
   "author": "",
   "license": "ISC",
