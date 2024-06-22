@@ -5,12 +5,17 @@ const rota = `/${configEnv.URLS.ROTA_CONTEUDOS}`
 const ConteudoPostBody = require('./class/ConteudoPostBody.js')
 const body = new ConteudoPostBody()
 const dataAtual = new Date(Date.now()).toISOString().substring(0, 16)
+const delayMaximo = 100
 let idCadastro = null
 
 describe('Suite de testes do trabalho de entrega', () => {
     beforeAll(async () => {
+        const timeInicial = Date.now()
         const responsePost = await request(baseUrl).post(rota).send(body)
+        const timeFinal = Date.now()
         idCadastro = responsePost.body.id
+
+        expect(timeFinal - timeInicial).toBeLessThanOrEqual(delayMaximo)
     })
 
     describe('Parte 1 - Testes na uri de Conteúdos', () => {
