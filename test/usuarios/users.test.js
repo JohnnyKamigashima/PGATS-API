@@ -1,6 +1,5 @@
-const dotEnv = require('dotenv')
-dotEnv.config()
 const request = require('supertest');
+const configEnv = require('../../suporte/configEnv.js')
 const CadastroBody = require('./class/CadastroBody')
 const faker = require('faker');
 
@@ -9,14 +8,17 @@ faker.locale = 'pt_BR';
 
 describe('Suite de testes da api users...', () => {
 
-    const baseUrl = process.env.BASE_URL
-    const rota = `/${process.env.ROTA_USUARIOS}`
+    const baseUrl = configEnv.URLS.BASE_URL
+    const rota = `/${configEnv.URLS.ROTA_USUARIOS}`
     const body = new CadastroBody()
+    const delayMaximo = 100
 
     const recebido = []
 
     beforeAll(async () => {
+        const timeInicial = Date.now()
         const response = await request(baseUrl).post(rota).send(body)
+        const timeFinal = Date.now()
 
         recebido.id = response.body.id
 
@@ -24,6 +26,7 @@ describe('Suite de testes da api users...', () => {
         expect(response.body.email).toBe(body.email)
         expect(response.body.telefone).toBe(body.telefone)
         expect(response.status).toBe(201)
+        expect(timeFinal - timeInicial).toBeLessThanOrEqual(delayMaximo)
     })
 
     it('Consulta todos os usuários...deve retornar status 200.', async () => {
@@ -70,7 +73,12 @@ describe('Suite de testes da api users...', () => {
         body.telefone = faker.phone.phoneNumber();
         body.senha = faker.internet.password()
 
+        const timeInicial = Date.now()
         const responseUpdate = await request(baseUrl).put(`${rota}/${recebido.id}`).send(body)
+        const timeFinal = Date.now()
+
+        expect(timeFinal - timeInicial).toBeLessThanOrEqual(delayMaximo)
+
         const responseGet = await request(baseUrl).get(`${rota}/${recebido.id}`)
         const { id, nome, email, telefone } = responseGet.body
 

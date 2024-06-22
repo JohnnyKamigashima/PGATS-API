@@ -1,8 +1,7 @@
 const request = require('supertest');
-const dotEnv = require('dotenv')
-dotEnv.config()
-const baseUrl = process.env.BASE_URL
-const rota = `/${process.env.ROTA_USUARIOS}`
+const configEnv = require('../../suporte/configEnv')
+const baseUrl = configEnv.URLS.BASE_URL
+const rota = `/${configEnv.URLS.ROTA_ATIVIDADES}`
 
 describe('Suite de testes da api atividades...', () => {
     it('Consulta todas as atividades...deves retornar status 200.', async () => {

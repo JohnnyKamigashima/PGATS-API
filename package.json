@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch test/**/*.test.js",
-    "testUser": "jest --watch test/usuarios/users.test.js"
+    "test": "jest  test/**/*.test.js",
+    "testUser": "jest  test/usuarios/users.test.js",
+    "testConteudos": "jest  test/conteudos/conteudos.test.js",
+    "testAtividades": "jest  test/atividades/atividades.test.js"
   },
   "author": "",
   "license": "ISC",
